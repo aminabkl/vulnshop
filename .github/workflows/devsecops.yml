@@ -29,5 +29,10 @@ jobs:
 
   # A compléter pendant l'atelier 2 :
   #  - build de l'image + scan de l'image (Trivy)
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build --pull -t python:3.11-slim .
   #  - SBOM (Syft) publié comme artefact
   #  - DAST : lancer l'application puis OWASP ZAP baseline sur http://localhost:5000
