@@ -29,10 +29,33 @@ jobs:
 
   # A compléter pendant l'atelier 2 :
   #  - build de l'image + scan de l'image (Trivy)
+  #build:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: actions/checkout@v4
+  #    - run: docker build --pull -t python:3.11-slim .
+
+  
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build --pull -t python:3.11-slim .
+ 
+      - name: Build image
+        run: docker build --pull -t myapp:${{ github.sha }} .
+ 
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: myapp:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
+
+        
+    
+
   #  - SBOM (Syft) publié comme artefact
   #  - DAST : lancer l'application puis OWASP ZAP baseline sur http://localhost:5000
