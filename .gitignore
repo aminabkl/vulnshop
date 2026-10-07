@@ -10,3 +10,7 @@ sbom.json
 cosign.key
 cosign.pub
 *.sig
+
+.env
+.env.*
+!.env.example
