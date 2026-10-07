@@ -1,5 +1,5 @@
 import os
 
-DB_HOST = "db.internal"
-DB_USER = "shop"
-DB_PASSWORD = "D76g4qM2WZJNg1LT4gHK"
+DB_HOST = os.environ["DB_HOST"]
+DB_USER = os.environ["DB_USER"]
+DB_PASSWORD = os.environ["DB_PASSWORD"]
